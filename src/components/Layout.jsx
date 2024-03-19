@@ -1,27 +1,20 @@
 import { Outlet } from "react-router-dom";
-// import PropTypes from 'prop-types';
-import { Component } from "react";
 import Header from './Header';
 import Footer from "./Footer";
+import PropTypes from 'prop-types';
 
-class Layout extends Component{
-    constructor(props) {
-      super(props);
-    }
-  
-    render() {
-      return (
-        <>
-          <Header/>
-          <Outlet />
-          <Footer />
-        </>
-      );
-    }
+Layout.propTypes = {
+  authenticated: PropTypes.bool,
+  setAuthenticated: PropTypes.func
 }
 
-// Layout.propTypes = {
-//   cartLength: PropTypes.number
-// }
-  
-export default Layout
+
+export default function Layout({authenticated, setAuthenticated}){
+  return(
+    <>
+      <Header authenticated={authenticated} setAuthenticated={setAuthenticated}/>
+      <Outlet />
+      <Footer />
+    </>
+  )
+}

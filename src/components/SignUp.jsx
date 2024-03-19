@@ -2,20 +2,9 @@ import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
-import '../style/LogIn.css'
-
-LogIn.propTypes = {
-  authenticated: PropTypes.bool,
-  setAuthenticated: PropTypes.func
-}
-
-export default function LogIn({setAuthenticated}){
-  const navigate = useNavigate();
-
-  const [logInError, setLogInError] = useState(false);
+export default function SignUp(){
+  const [registrationError, setRegistrationError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('')
 
   const validationSchema = Yup.object().shape({
@@ -24,7 +13,10 @@ export default function LogIn({setAuthenticated}){
       .min(1, 'Username must be at least have a character'),
     password: Yup.string()
       .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
+      .min(6, 'Password must be at least 6 characters'),
+    confirmPassword: Yup.string()
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('password')],'Passwords must match')
   });
 
   const formOptions = {resolver: yupResolver(validationSchema)};
@@ -36,7 +28,7 @@ export default function LogIn({setAuthenticated}){
    const formData = JSON.stringify(data);
    try {
      const req = await fetch(
-       'http://localhost:8080/api/login',
+       'http://localhost:8080/api/signup',
        {
          method: 'post',
          body: formData,
@@ -48,20 +40,13 @@ export default function LogIn({setAuthenticated}){
      const jsonResponse = await req.json();
 
      if (req.status !== 200){
-       setErrorMessage(jsonResponse.errorMessage);
-       setLogInError(true);
+       setErrorMessage(jsonResponse.errors[0].msg);
+       setRegistrationError(true);
        return;
      }
-     
-     await localStorage.setItem("token", jsonResponse.token);
-     await localStorage.setItem("userAuth", true);
-     await localStorage.setItem("username", jsonResponse.user.username);
-     await localStorage.setItem("id", jsonResponse.user._id);
-
-     setAuthenticated(true);
-
-     navigate('/');
-    }catch(err){
+     reset();
+     window.location.href = '/logIn'
+   } catch(err){
      console.log(e);
      console.log(err);
    }
@@ -69,9 +54,9 @@ export default function LogIn({setAuthenticated}){
 
   return(
     <div className='content'>
-      <h2>Log in</h2>
-      <div className='logInItem'>
-        <form className='logInFormContainer' onSubmit={handleSubmit(submitForm)}>
+      <h2>Register</h2>
+      <div className='signUpItem'>
+        <form className='signUpFormContainer' onSubmit={handleSubmit(submitForm)}>
           <label htmlFor="username">Username:</label>
           <input className={`${errors.username ? 'invalidInputStyle': 'validInputStyle'}`} placeholder="User" {...register("username")}  />
           <div className={`${errors.username ? 'errorContainer' : 'hideDiv'}`}>{errors.username?.message}</div>
@@ -80,8 +65,12 @@ export default function LogIn({setAuthenticated}){
           <input className={`${errors.password ? 'invalidInputStyle': 'validInputStyle'}`} type="password" {...register("password")} />
           <div className={`${errors.password ? 'errorContainer' : 'hideDiv'}`}>{errors.password?.message}</div>
 
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input className={`${errors.confirmPassword ? 'invalidInputStyle': 'validInputStyle'}`} type="password" {...register("confirmPassword")} />
+          <div className={`${errors.confirmPassword ? 'errorContainer' : 'hideDiv'}`}>{errors.confirmPassword?.message}</div>
+          
           <input className='submitButton' type="submit" />
-          {logInError && <p>{errorMessage}</p>}
+          {registrationError && <span>{errorMessage}</span>}
         </form>
       </div>
     </div>

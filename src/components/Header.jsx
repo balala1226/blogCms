@@ -1,38 +1,39 @@
-import { Component } from "react";
-import { Link } from "react-router-dom";
-// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import '../style/Header.css'
+import PropTypes from 'prop-types';
 
-// import Icon from '@mdi/react';
+Header.propTypes = {
+  authenticated: PropTypes.bool,
+  setAuthenticated: PropTypes.func
+}
 
-class Header extends Component{
-  constructor(props) {
-    super(props);
+export default function Header({authenticated, setAuthenticated}){
+  const handleLogOut = () =>{
+    setAuthenticated(false);
+    localStorage.clear();
+    localStorage.setItem("userAuth", false);
   }
 
-  render() {
-    return (
-      <header>
-        <div className='logoContainer'>
-          <Link to="/" className='logoLink'>
-            <h1 className="headerPseudo">Pseudo</h1>
-            <h1 className="headerBlog">Blog</h1>
+  return(
+    <header>
+      <div className='logoContainer'>
+        <Link to="/" className='logoLink'>
+          <h1 className="headerPseudo">Pseudo</h1>
+          <h1 className="headerBlog">Blog</h1>
+        </Link>
+      </div>
+      { authenticated ? 
+        <div className='headerItem' onClick={handleLogOut}>
+          <Link to="/" className='headerItemLink'>
+            <p className='headerItemText'>Log Out</p>
           </Link>
-        </div>
+        </div> : 
         <div className='headerItem'>
           <Link to="/logIn" className='headerItemLink'>
             <p className='headerItemText'>Log In</p>
           </Link>
         </div>
-      </header>
-    );
-  }
+      }
+    </header>
+  )
 }
-
-Header.propTypes = {
-  // cartLength: PropTypes.number
-}
-
-
-export default Header
-
