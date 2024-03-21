@@ -17,6 +17,7 @@ export default function BlogPostTile({blogPost}){
         <div className='textTileContainer'>
           <div className='itemNameTileContainer'>
             <p className='itemNameTile'>{blogPost.title}</p>
+            <p className='itemNameTile'>{blogPost.user.username}</p>
           </div>
         </div>
       </Link>

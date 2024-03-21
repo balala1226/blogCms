@@ -39,7 +39,6 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone}){
     const submitForm = async (data, e) => {
         const formData = JSON.stringify(data);
         const bearerToken = `Bearer ${localStorage.getItem("token")}`
-        console.log("form data: " + formData);
 
         try {
             var apiToUse = '';

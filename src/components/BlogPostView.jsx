@@ -1,11 +1,14 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useReducer, useState} from 'react';
 import { useParams } from "react-router-dom";
 import { BlogPostModel } from '../models/BlogPostModel';
 import BlogPostForm from './BlogPostForm';
+import CommentForm from './CommentForm';
+import CommentView from './CommentView';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 import '../style/BlogPostTile.css'
+import { compareStringDateDescend } from '../helper/sortHelper';
 
 BlogPostView.propTypes = {
   authenticated: PropTypes.bool
@@ -17,6 +20,7 @@ export default function BlogPostView({authenticated}){
 
   const [editMode, setEditMode] = useState(false);
   const [blogPost, setBlogPost] = useState(new BlogPostModel());
+
   const {id} = useParams();
   const deleteApi = 'http://localhost:8080/api/delete_blog/';
   
@@ -44,8 +48,9 @@ export default function BlogPostView({authenticated}){
     newBlogPost.blogImageUrl = data.blogPost.blogImageUrl;
     newBlogPost.content = data.blogPost.content;
     newBlogPost.date = new Date(data.blogPost.date);
-    newBlogPost.user = data.blogPost.user.username;
+    newBlogPost.user = data.blogPost.user;
     newBlogPost.comments = data.blogPost.comments;
+    newBlogPost.comments.sort(compareStringDateDescend);
     newBlogPost.isPublished = data.blogPost.isPublished;
     newBlogPost.reactions = data.blogPost.reactions;
 
@@ -84,6 +89,10 @@ export default function BlogPostView({authenticated}){
     setEditMode(false);
   }
 
+  const commentUpdate = (data) => {
+    setBlogPost(data);
+  }
+
   return(
     <>
       <div className='blogPostView'>
@@ -104,7 +113,7 @@ export default function BlogPostView({authenticated}){
                 <p className='itemNameTile'>{blogPost.title}</p>
               </div>
               <div className='postTitleItem'>
-                <p className='itemNameTile'>{blogPost.user}</p>
+                <p className='itemNameTile'>{blogPost.user.username}</p>
                 <p className='itemNameTile'>{`${blogPost.date.getMonth()+1}-${blogPost.date.getDate()}-${blogPost.date.getFullYear()} `}</p>
               </div>
             </div>
@@ -118,6 +127,12 @@ export default function BlogPostView({authenticated}){
                 <p className='postContent'>{blogPost.content}</p>
             </div>
             <div className='commentsContainer'>
+              { authenticated && 
+                <CommentForm blogPost={blogPost} setBlogPost={commentUpdate} isNewComment={true}/>
+              }
+              {blogPost.comments.map((comment, index) => (
+                <CommentView  key={index} comment={comment}></CommentView>
+              ))}
             </div>
           </div>
         }
