@@ -53,11 +53,12 @@ export default function LogIn({setAuthenticated}){
        return;
      }
      
-     await localStorage.setItem("token", jsonResponse.token);
-     await localStorage.setItem("userAuth", true);
-     await localStorage.setItem("username", jsonResponse.user.username);
-     await localStorage.setItem("id", jsonResponse.user._id);
-
+     localStorage.setItem('token', jsonResponse.token);
+     localStorage.setItem('userAuthorized', true);
+     localStorage.setItem('userName', jsonResponse.user.username);
+     localStorage.setItem('userId', jsonResponse.user._id);
+     localStorage.setItem('tokenDate', new Date())
+     
      setAuthenticated(true);
 
      navigate('/');

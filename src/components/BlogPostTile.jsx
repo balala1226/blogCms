@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom';
 import '../style/BlogPostTile.css'
 
 BlogPostTile.propTypes = {
-  post: PropTypes.object
+  blogPost: PropTypes.object
 }
 
-export default function BlogPostTile(){
+export default function BlogPostTile({blogPost}){
   return(
     <div className='blogPostTile'>
-      <Link to={"/post/"+this.props.post.id} className='blogPostTileLink'>
+      <Link to={"/post/"+blogPost._id} className='blogPostTileLink'>
         <div className='imageTileContainer'>
-          <img className='itemImageTile' src={this.props.post.image}></img>
+          <img className='itemImageTile' src={blogPost.image}></img>
         </div>
         <div className='textTileContainer'>
           <div className='itemNameTileContainer'>
-            <p className='itemNameTile'>{this.props.post.title}</p>
+            <p className='itemNameTile'>{blogPost.title}</p>
           </div>
         </div>
       </Link>
