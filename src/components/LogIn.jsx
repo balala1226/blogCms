@@ -70,18 +70,18 @@ export default function LogIn({setAuthenticated}){
 
   return(
     <div className='content'>
-      <h2>Log in</h2>
       <div className='logInItem'>
+        <h2>Log in</h2>
         <form className='logInFormContainer' onSubmit={handleSubmit(submitForm)}>
           <label htmlFor="username">Username:</label>
-          <input className={`${errors.username ? 'invalidInputStyle': 'validInputStyle'}`} placeholder="User" {...register("username")}  />
-          <div className={`${errors.username ? 'errorContainer' : 'hideDiv'}`}>{errors.username?.message}</div>
+          <input className="logInInput" placeholder="User" {...register("username")}  />
+          <div className="logInError">{errors.username?.message}</div>
 
           <label  htmlFor="password">Password:</label>
-          <input className={`${errors.password ? 'invalidInputStyle': 'validInputStyle'}`} type="password" {...register("password")} />
+          <input className="logInInput"  type="password" {...register("password")} />
           <div className={`${errors.password ? 'errorContainer' : 'hideDiv'}`}>{errors.password?.message}</div>
 
-          <input className='submitButton' type="submit" />
+          <button className='logInButton' type="submit" >Log In</button>
           {logInError && <p>{errorMessage}</p>}
         </form>
       </div>

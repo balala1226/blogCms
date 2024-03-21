@@ -18,7 +18,7 @@ header{
 }
 
 .headerPseudo{
-  color: violet;
+  color: rgb(238, 130, 238);
 }
 
 .headerBlog{
@@ -55,5 +55,5 @@ header{
   font-size: calc(15px + 0.5vw);
 }
 .headerItemText:hover{
-  color: violet;
+  color: rgb(238, 130, 238);
 }

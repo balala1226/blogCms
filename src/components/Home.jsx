@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import BlogPostTile from './BlogPostTile';
+
 Home.propTypes = {
   authenticated: PropTypes.bool
 }
@@ -37,10 +38,10 @@ export default function Home({ authenticated }){
       <div className='content'>
         { authenticated &&
           <Link to="/createPost" className='createPostLink'>
-            <h2>Make New Post</h2>
+            <div className='makeNewPostContainer'><h2>Make New Post</h2></div>
           </Link>
         }
-        <h1>All Posts</h1>
+        <div className='allPostContainer'><h1>All Posts</h1></div>
         {allPosts.map((currentPost, index) => (
           <BlogPostTile  key={index} blogPost={currentPost}></BlogPostTile>
         ))}

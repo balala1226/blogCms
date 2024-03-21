@@ -92,12 +92,12 @@ export default function CommentForm({blogPost, setBlogPost, isNewComment}){
     return(
         <>
         <form className='commentForm' onSubmit={handleSubmit(submitForm)}>
-            <label htmlFor="content">New Comment:</label>
-            <textarea  name="content" rows="4" cols="50" placeholder='New Comment'  {...register("content")}></textarea>
+            {/* <label htmlFor="content">New Comment:</label> */}
+            <textarea  name="content" rows="6" cols="50" placeholder='New Comment'  {...register("content")}></textarea>
             {/* <div className={`${errors.username ? 'errorContainer' : 'hideDiv'}`}>{errors.username?.message}</div> */}
 
             <input name="userId" type="hidden" value={localStorage.getItem("userId")} {...register("userId")}/>
-            <button className='formButton' type="submit">Submit</button>
+            <button className='confirmButton' type="submit">Submit</button>
             {commentError && <p>{errorMessage}</p>}
         </form>
         </>

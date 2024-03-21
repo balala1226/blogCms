@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 
-import '../style/LogIn.css'
+import '../style/BlogPostForm.css'
 import { BlogPostModel } from '../models/BlogPostModel';
 import { compareStringDateDescend } from '../helper/sortHelper';
 
@@ -114,18 +114,18 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone}){
         <form className='blogPostFormContainer' onSubmit={handleSubmit(submitForm)}>
             <label htmlFor="title">Title:</label>
             <input name="title" type="text" defaultValue={blogPost.title} {...register("title")}/>
-            {/* <div className={`${errors.username ? 'errorContainer' : 'hideDiv'}`}>{errors.username?.message}</div> */}
 
             <label  htmlFor="content">Content:</label>
-            <textarea  name="content" rows="4" cols="50" defaultValue={blogPost.content}  {...register("content")}></textarea>
-            {/* <div className={`${errors.password ? 'errorContainer' : 'hideDiv'}`}>{errors.password?.message}</div> */}
+            <textarea  name="content" rows="40" cols="50" defaultValue={blogPost.content}  {...register("content")}></textarea>
 
             <label  htmlFor="isPublished">Publish:
-                <input name="isPublished" type='checkbox' defaultChecked={blogPost.isPublished} {...register("isPublished")}/>
+                <input className="publishCheckbox" name="isPublished" type='checkbox' defaultChecked={blogPost.isPublished} {...register("isPublished")}/>
             </label>
             <input name="userId" type="hidden" value={localStorage.getItem("userId")} {...register("userId")}/>
-            <button className='formButton' type="submit">Confirm</button>
-            <button className='formButton' onClick={handleEditCancelButton}>Cancel</button>
+            <div className='editFormButtonContainer'>
+            <button className='confirmButton' type="submit">Confirm</button>
+            <button className='cancelButton' onClick={handleEditCancelButton}>Cancel</button>
+            </div>
             {editError && <p>{errorMessage}</p>}
         </form>
     )

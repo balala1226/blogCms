@@ -9,7 +9,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-family: 'Quicksand';
 }
+
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  cursor: pointer;
+}
+
 
 #root {
   display: flex;
@@ -27,23 +38,24 @@ body {
 }
 
 h1 {
-  font-size: calc(15px + 3vw);
+  font-size: calc(18px + 0.5vw);
   line-height: 0.9;
   margin:0;
 }
 
 h2 {
-  font-size: calc(20px + 1vw);
+  font-size: calc(16px + 0.5vw);
   line-height: 0.9;
   margin:0;
 }
 
 h3 {
-  font-size: calc(15px + 1vw);
+  font-size: calc(14px + 0.5vw);
   line-height: 0.9;
   margin:0;
 }
 
 p{
+  font-size: calc(12px + 0.5vw);
   margin: 0;
 }

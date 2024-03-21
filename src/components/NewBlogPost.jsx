@@ -3,7 +3,7 @@ import { BlogPostModel } from '../models/BlogPostModel';
 import BlogPostForm from './BlogPostForm';
 import { useNavigate } from 'react-router-dom';
 
-import '../style/BlogPostTile.css'
+import '../style/BlogPost.css'
 
 export default function NewBlogPost(){
     const navigate = useNavigate();
@@ -21,9 +21,9 @@ export default function NewBlogPost(){
     };
 
     return(
-        <div className='blogPostView'>
-            <h2>New Post</h2>
+        <div className='content'>
             <div className='blogContainer'>
+                <h2>New Post</h2>
                 <BlogPostForm blogPost={blogPost} setBlogPost={setBlogPost} formEditDone={handleEditDone}/>
             </div> 
         </div>

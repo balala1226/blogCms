@@ -5,3 +5,38 @@
 .registerLink:hover{
     color: violet;
 }
+
+.logInItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 80vh;
+    width: 100%;
+    gap: 5vh;
+}
+
+.logInFormContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+}
+
+.logInInput{
+    width: 50%;
+}
+
+.logInButton{
+    width: 50%;
+    background-color: rgb(0, 255, 132);
+    border: transparent;
+    border-radius: 5px;
+    height: 4vh;
+}
+.logInButton:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+}

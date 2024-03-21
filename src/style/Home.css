@@ -1,6 +1,18 @@
-/* .homeContent{
+.makeNewPostContainer{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-} */
+    justify-content: center;
+    border-radius:30%;
+    height: 5vh;
+    width: 30vw;
+}
+.makeNewPostContainer:hover{
+    box-shadow: 0 0 10px rgb(238, 130, 238);
+}
+
+.allPostContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+}

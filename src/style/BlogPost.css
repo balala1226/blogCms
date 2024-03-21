@@ -1,0 +1,76 @@
+.blogContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+    margin-top: 2%;
+}
+
+.postButtonsContainer{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    width: 80vw;
+}
+
+.confirmButton{
+    background-color: rgb(0, 255, 132);
+    border: transparent;
+    border-radius: 5px;
+    width: 15vw;
+    height: 4vh;
+}
+.confirmButton:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+}
+
+.cancelButton{
+    background-color: rgb(255, 55, 112);
+    border: transparent;
+    border-radius: 5px;
+    width: 15vw;
+    height: 4vh;
+}
+.cancelButton:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+}
+
+.blogContent{
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.426);
+}
+.blogTitle{
+    font-weight: bold;
+}
+
+.postTitleContainer{
+    width: 100%;
+}
+.postAuthorItem{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+}
+
+.postAuthorItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%
+}
+
+.commentsContainer{
+    width: 100%;
+}
+
+.commentHeader{
+    text-align: left;
+    font-weight: bold;
+}

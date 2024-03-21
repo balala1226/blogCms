@@ -7,7 +7,7 @@ import CommentView from './CommentView';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-import '../style/BlogPostTile.css'
+import '../style/BlogPost.css'
 import { compareStringDateDescend } from '../helper/sortHelper';
 
 BlogPostView.propTypes = {
@@ -95,38 +95,44 @@ export default function BlogPostView({authenticated}){
 
   return(
     <>
-      <div className='blogPostView'>
+      <div className='content'>
         { editMode ? 
           <div className='blogContainer'>
+            <div className='postTitleItem'>
+              <h1 className='blogTitle'>Edit Post</h1>
+            </div>
             <BlogPostForm blogPost={blogPost} setBlogPost={setBlogPost} formEditDone={formEditDone}/>
           </div>  
         : 
           <div className='blogContainer'>
             {authenticated && 
               <div className='postButtonsContainer'>
-                <button className='postButton' onClick={handleEditButton}>Edit</button>
-                <button className='postButton' onClick={handleDeleteButton}>Delete</button>
+                <button className='confirmButton' onClick={handleEditButton}>Edit</button>
+                <button className='cancelButton' onClick={handleDeleteButton}>Delete</button>
               </div>
             }
-            <div className='postTitleContainer'>
-              <div className='postTitleItem'>
-                <p className='itemNameTile'>{blogPost.title}</p>
+            <div className='blogContent'>
+              <div className='postTitleContainer'>
+                <div className='postTitleItem'>
+                  <h1 className='blogTitle'>{blogPost.title}</h1>
+                </div>
+                <div className='postAuthorItem'>
+                  <p className='blogAuthor'>by {blogPost.user.username}</p>
+                  <p className='blogDate'>Uploaded on {`${blogPost.date.getMonth()+1}-${blogPost.date.getDate()}-${blogPost.date.getFullYear()} `}</p>
+                </div>
               </div>
-              <div className='postTitleItem'>
-                <p className='itemNameTile'>{blogPost.user.username}</p>
-                <p className='itemNameTile'>{`${blogPost.date.getMonth()+1}-${blogPost.date.getDate()}-${blogPost.date.getFullYear()} `}</p>
+              {
+                blogPost.blogImageUrl != '-' &&
+                <div className='postImageContainer'>
+                  <img className='postImage' src={blogPost.blogImageUrl}></img>
+                </div>
+              }
+              <div className='postContentContainer'>
+                  <p className='postContent'>{blogPost.content}</p>
               </div>
-            </div>
-            {
-              blogPost.blogImageUrl != '-' &&
-              <div className='postImageContainer'>
-                <img className='postImage' src={blogPost.blogImageUrl}></img>
-              </div>
-            }
-            <div className='postContentContainer'>
-                <p className='postContent'>{blogPost.content}</p>
             </div>
             <div className='commentsContainer'>
+              <p className='commentHeader'>Comments</p>
               { authenticated && 
                 <CommentForm blogPost={blogPost} setBlogPost={commentUpdate} isNewComment={true}/>
               }

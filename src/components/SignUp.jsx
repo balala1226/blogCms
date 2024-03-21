@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import '../style/LogIn.css'
 
 export default function SignUp(){
   const [registrationError, setRegistrationError] = useState(false);
@@ -54,22 +55,22 @@ export default function SignUp(){
 
   return(
     <div className='content'>
-      <h2>Register</h2>
-      <div className='signUpItem'>
-        <form className='signUpFormContainer' onSubmit={handleSubmit(submitForm)}>
+      <div className='logInItem'>
+        <h2>Register</h2>
+        <form className='logInFormContainer' onSubmit={handleSubmit(submitForm)}>
           <label htmlFor="username">Username:</label>
-          <input className={`${errors.username ? 'invalidInputStyle': 'validInputStyle'}`} placeholder="User" {...register("username")}  />
-          <div className={`${errors.username ? 'errorContainer' : 'hideDiv'}`}>{errors.username?.message}</div>
+          <input className="logInInput" placeholder="User" {...register("username")}  />
+          <div className="logInError">{errors.username?.message}</div>
 
           <label  htmlFor="password">Password:</label>
-          <input className={`${errors.password ? 'invalidInputStyle': 'validInputStyle'}`} type="password" {...register("password")} />
-          <div className={`${errors.password ? 'errorContainer' : 'hideDiv'}`}>{errors.password?.message}</div>
+          <input className="logInInput" type="password" {...register("password")} />
+          <div className="logInError">{errors.password?.message}</div>
 
           <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input className={`${errors.confirmPassword ? 'invalidInputStyle': 'validInputStyle'}`} type="password" {...register("confirmPassword")} />
-          <div className={`${errors.confirmPassword ? 'errorContainer' : 'hideDiv'}`}>{errors.confirmPassword?.message}</div>
+          <input className="logInInput" type="password" {...register("confirmPassword")} />
+          <div className="logInError">{errors.confirmPassword?.message}</div>
           
-          <input className='submitButton' type="submit" />
+          <button className='logInButton' type="submit" >Register</button>
           {registrationError && <span>{errorMessage}</span>}
         </form>
       </div>
