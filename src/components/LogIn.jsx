@@ -4,15 +4,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-
-import '../style/LogIn.css'
+import { UserModel } from "../models/UserModel";
+import '../style/LogIn.css';
 
 LogIn.propTypes = {
   authenticated: PropTypes.bool,
-  setAuthenticated: PropTypes.func
+  setAuthenticated: PropTypes.func,
+  setCurrentUser: PropTypes.func
 }
 
-export default function LogIn({setAuthenticated}){
+export default function LogIn({setAuthenticated, setCurrentUser}){
   const navigate = useNavigate();
 
   const [logInError, setLogInError] = useState(false);
@@ -54,12 +55,18 @@ export default function LogIn({setAuthenticated}){
      }
      
      localStorage.setItem('token', jsonResponse.token);
-     localStorage.setItem('userAuthorized', true);
-     localStorage.setItem('userName', jsonResponse.user.username);
      localStorage.setItem('userId', jsonResponse.user._id);
+     localStorage.setItem('userAuthorized', true);
      localStorage.setItem('tokenDate', new Date())
      
+     var newUser = new UserModel();
+     newUser.id = jsonResponse.user._id;
+     newUser.username = jsonResponse.user.username;
+     newUser.admin = jsonResponse.user.admin;
+     newUser.token = jsonResponse.token;
+
      setAuthenticated(true);
+     setCurrentUser(newUser);
 
      navigate('/');
     }catch(err){

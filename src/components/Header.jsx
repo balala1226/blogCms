@@ -1,17 +1,20 @@
 import { Link } from 'react-router-dom';
 import '../style/Header.css'
 import PropTypes from 'prop-types';
+import { UserModel } from '../models/UserModel';
 
 Header.propTypes = {
   authenticated: PropTypes.bool,
-  setAuthenticated: PropTypes.func
+  setAuthenticated: PropTypes.func,
+  setCurrentUser: PropTypes.func
 }
 
-export default function Header({authenticated, setAuthenticated}){
+export default function Header({authenticated, setAuthenticated, setCurrentUser}){
   const handleLogOut = () =>{
     setAuthenticated(false);
     localStorage.clear();
     localStorage.setItem("userAuth", false);
+    setCurrentUser(new UserModel());
   }
 
   return(

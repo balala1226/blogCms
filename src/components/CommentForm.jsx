@@ -10,10 +10,11 @@ import { CommentModel } from '../models/CommentModel';
 CommentForm.propTypes = {
   blogPost: PropTypes.object,
   setBlogPost: PropTypes.func,
-  isNewComment: PropTypes.bool
+  isNewComment: PropTypes.bool,
+  currentUser: PropTypes.object,
 }
 
-export default function CommentForm({blogPost, setBlogPost, isNewComment}){
+export default function CommentForm({blogPost, setBlogPost, isNewComment, currentUser}){
     const [commentError, setCommentError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -40,7 +41,7 @@ export default function CommentForm({blogPost, setBlogPost, isNewComment}){
                 blogPostId: blogPost.id
             }
             const formData = JSON.stringify(payloadData);
-            const bearerToken = `Bearer ${localStorage.getItem("token")}`
+            const bearerToken = `Bearer ${currentUser.token}`
     
             var apiToUse = '';
             var method = 'post';
@@ -96,7 +97,7 @@ export default function CommentForm({blogPost, setBlogPost, isNewComment}){
             <textarea  name="content" rows="6" cols="50" placeholder='New Comment'  {...register("content")}></textarea>
             {/* <div className={`${errors.username ? 'errorContainer' : 'hideDiv'}`}>{errors.username?.message}</div> */}
 
-            <input name="userId" type="hidden" value={localStorage.getItem("userId")} {...register("userId")}/>
+            <input name="userId" type="hidden" value={currentUser.id} {...register("userId")}/>
             <button className='confirmButton' type="submit">Submit</button>
             {commentError && <p>{errorMessage}</p>}
         </form>

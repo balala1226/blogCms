@@ -5,14 +5,15 @@ import PropTypes from 'prop-types';
 
 Layout.propTypes = {
   authenticated: PropTypes.bool,
-  setAuthenticated: PropTypes.func
+  setAuthenticated: PropTypes.func,
+  setCurrentUser: PropTypes.func,
 }
 
 
-export default function Layout({authenticated, setAuthenticated}){
+export default function Layout({authenticated, setAuthenticated, setCurrentUser}){
   return(
     <>
-      <Header authenticated={authenticated} setAuthenticated={setAuthenticated}/>
+      <Header authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser}/>
       <Outlet />
       <Footer />
     </>

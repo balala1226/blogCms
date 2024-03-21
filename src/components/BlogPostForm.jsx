@@ -12,9 +12,10 @@ BlogPostForm.propTypes = {
   blogPost: PropTypes.object,
   setBlogPost: PropTypes.func,
   formEditDone: PropTypes.func,
+  currentUser: PropTypes.object
 }
 
-export default function BlogPostForm({blogPost, setBlogPost, formEditDone}){
+export default function BlogPostForm({blogPost, setBlogPost, formEditDone, currentUser}){
     const [editError, setEditError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
 
@@ -39,7 +40,7 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone}){
 
     const submitForm = async (data, e) => {
         const formData = JSON.stringify(data);
-        const bearerToken = `Bearer ${localStorage.getItem("token")}`
+        const bearerToken = `Bearer ${currentUser.token}`
 
         try {
             var apiToUse = '';
@@ -121,7 +122,7 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone}){
             <label  htmlFor="isPublished">Publish:
                 <input className="publishCheckbox" name="isPublished" type='checkbox' defaultChecked={blogPost.isPublished} {...register("isPublished")}/>
             </label>
-            <input name="userId" type="hidden" value={localStorage.getItem("userId")} {...register("userId")}/>
+            <input name="userId" type="hidden" value={currentUser.id} {...register("userId")}/>
             <div className='editFormButtonContainer'>
             <button className='confirmButton' type="submit">Confirm</button>
             <button className='cancelButton' onClick={handleEditCancelButton}>Cancel</button>

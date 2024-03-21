@@ -11,11 +11,12 @@ import '../style/BlogPost.css'
 import { compareStringDateDescend } from '../helper/sortHelper';
 
 BlogPostView.propTypes = {
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
+  currentUser: PropTypes.object
 }
 
 
-export default function BlogPostView({authenticated}){
+export default function BlogPostView({authenticated, currentUser}){
   const navigate = useNavigate();
 
   const [editMode, setEditMode] = useState(false);
@@ -69,7 +70,7 @@ export default function BlogPostView({authenticated}){
   };
 
   const deletePost = async() =>{
-    const bearerToken = `Bearer ${localStorage.getItem("token")}`;
+    const bearerToken = `Bearer ${currentUser.token}`;
     const deleteApiWithId = deleteApi+blogPost.id;
     const req = await fetch(
       deleteApiWithId,
@@ -101,11 +102,11 @@ export default function BlogPostView({authenticated}){
             <div className='postTitleItem'>
               <h1 className='blogTitle'>Edit Post</h1>
             </div>
-            <BlogPostForm blogPost={blogPost} setBlogPost={setBlogPost} formEditDone={formEditDone}/>
+            <BlogPostForm blogPost={blogPost} setBlogPost={setBlogPost} formEditDone={formEditDone} currentUser={currentUser}/>
           </div>  
         : 
           <div className='blogContainer'>
-            {authenticated && 
+            {authenticated && currentUser.admin &&
               <div className='postButtonsContainer'>
                 <button className='confirmButton' onClick={handleEditButton}>Edit</button>
                 <button className='cancelButton' onClick={handleDeleteButton}>Delete</button>
@@ -134,7 +135,7 @@ export default function BlogPostView({authenticated}){
             <div className='commentsContainer'>
               <p className='commentHeader'>Comments</p>
               { authenticated && 
-                <CommentForm blogPost={blogPost} setBlogPost={commentUpdate} isNewComment={true}/>
+                <CommentForm blogPost={blogPost} setBlogPost={commentUpdate} isNewComment={true} currentUser={currentUser}/>
               }
               {blogPost.comments.map((comment, index) => (
                 <CommentView  key={index} comment={comment}></CommentView>

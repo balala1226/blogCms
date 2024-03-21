@@ -51,21 +51,28 @@
 .postTitleContainer{
     width: 100%;
 }
-.postAuthorItem{
+.postTitleItem{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
     text-align: left;
+    margin-top: 2%;
 }
 
 .postAuthorItem{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%
+    width: 100%;
+    margin-top: 2%;
 }
 
+.postContentContainer{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: justify;
+}
 .commentsContainer{
     width: 100%;
 }
