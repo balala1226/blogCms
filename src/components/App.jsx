@@ -8,6 +8,7 @@ import SignUp from './SignUp';
 import BlogPostView from './BlogPostView';
 import { useState } from "react";
 import NewBlogPost from "./NewBlogPost";
+import ErrorPage from "./ErrorPage";
 
 export default function App(){
   const [authenticated, setAuthenticated] = useState(() =>{
@@ -38,6 +39,7 @@ export default function App(){
             <Route path="/signUp" element={<SignUp/>} />
             <Route path="/post/:id" element={<BlogPostView authenticated={authenticated}/>} />
             <Route path="/createPost" element={<NewBlogPost/>} />
+            <Route path="*" element={<ErrorPage/>} />
           </Route>
         </Routes>
       </BrowserRouter>

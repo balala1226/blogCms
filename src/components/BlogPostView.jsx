@@ -34,7 +34,7 @@ export default function BlogPostView({authenticated}){
 
     if (req.status !== 200){
       console.log("post error");
-      navigate('/');
+      navigate('/error');
       return;
     }
 
