@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import '../style/LogIn.css'
 import { BlogPostModel } from '../models/BlogPostModel';
+import { compareStringDateDescend } from '../helper/sortHelper';
 
 BlogPostForm.propTypes = {
   blogPost: PropTypes.object,
@@ -79,6 +80,7 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone}){
             newBlogPost.date = new Date(jsonResponse.blogPost.date);
             newBlogPost.user = jsonResponse.blogPost.user;
             newBlogPost.comments = jsonResponse.blogPost.comments;
+            newBlogPost.comments.sort(compareStringDateDescend);
             newBlogPost.isPublished = jsonResponse.blogPost.isPublished;
             newBlogPost.reactions = jsonResponse.blogPost.reactions;
             newBlogPost.id = jsonResponse.blogPost._id;
