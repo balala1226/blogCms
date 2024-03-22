@@ -18,6 +18,7 @@ BlogPostForm.propTypes = {
 export default function BlogPostForm({blogPost, setBlogPost, formEditDone, currentUser}){
     const [editError, setEditError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
+    const [blogImage, setBlogImage] = useState()
 
     const validationSchema = Yup.object().shape({
         title: Yup.string()
@@ -39,7 +40,13 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone, curre
     const updatePostApi = 'http://localhost:8080/api/update_blog/';
 
     const submitForm = async (data, e) => {
-        const formData = JSON.stringify(data);
+        var formData = new FormData();
+        formData.append('title', data.title);
+        formData.append('content', data.content);
+        formData.append('isPublished', data.isPublished);
+        formData.append('userId', data.userId);
+        formData.append('blogImage', blogImage);
+
         const bearerToken = `Bearer ${currentUser.token}`
 
         try {
@@ -57,9 +64,9 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone, curre
                 apiToUse,
                 {
                     method: method,
+                    mode: 'cors',
                     headers: {
-                        'Content-Type': 'application/json',
-                        "Authorization": bearerToken,
+                        'Authorization': bearerToken,
                     },
                     body: formData,
                 }
@@ -115,6 +122,9 @@ export default function BlogPostForm({blogPost, setBlogPost, formEditDone, curre
         <form className='blogPostFormContainer' onSubmit={handleSubmit(submitForm)}>
             <label htmlFor="title">Title:</label>
             <input name="title" type="text" defaultValue={blogPost.title} {...register("title")}/>
+
+            <label  htmlFor="blogImage">Image:</label>
+            <input type="file" name="imageUrl" accept="image/*" onChange={(e) => setBlogImage(e.target.files[0])}/>
 
             <label  htmlFor="content">Content:</label>
             <textarea  name="content" rows="40" cols="50" defaultValue={blogPost.content}  {...register("content")}></textarea>

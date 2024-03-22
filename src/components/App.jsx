@@ -81,7 +81,7 @@ export default function App(){
             <Route path="/logIn" element={<LogIn setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser}/>} />
             {/* <Route path="/signUp" element={<SignUp/>} /> */}
             <Route path="/post/:id" element={<BlogPostView authenticated={authenticated} currentUser={currentUser}/>} />
-            <Route path="/createPost" element={<NewBlogPost/>} />
+            <Route path="/createPost" element={<NewBlogPost currentUser={currentUser}/>} />
             <Route path="*" element={<ErrorPage/>} />
           </Route>
         </Routes>

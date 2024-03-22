@@ -68,6 +68,14 @@
     margin-top: 2%;
 }
 
+.postImageContainer{
+    width: 100%;
+}
+
+.postImage{
+    max-width: 100%;
+}
+
 .postContentContainer{
     margin-top: 2%;
     margin-bottom: 2%;

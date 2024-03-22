@@ -2,10 +2,15 @@ import {useState} from 'react';
 import { BlogPostModel } from '../models/BlogPostModel';
 import BlogPostForm from './BlogPostForm';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import '../style/BlogPost.css'
 
-export default function NewBlogPost(){
+NewBlogPost.propTypes = {
+    currentUser: PropTypes.object
+}
+
+export default function NewBlogPost({currentUser}){
     const navigate = useNavigate();
 
     const [blogPost, setBlogPost] = useState(new BlogPostModel());
@@ -24,7 +29,7 @@ export default function NewBlogPost(){
         <div className='content'>
             <div className='blogContainer'>
                 <h2>New Post</h2>
-                <BlogPostForm blogPost={blogPost} setBlogPost={setBlogPost} formEditDone={handleEditDone}/>
+                <BlogPostForm blogPost={blogPost} setBlogPost={setBlogPost} formEditDone={handleEditDone} currentUser={currentUser}/>
             </div> 
         </div>
     )

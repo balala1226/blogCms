@@ -11,9 +11,12 @@ export default function BlogPostTile({blogPost}){
   return(
     <div className='blogPostTile'>
       <Link to={"/post/"+blogPost._id} className='blogPostTileLink'>
-        <div className='imageTileContainer'>
-          <img className='itemImageTile' src={blogPost.image}></img>
-        </div>
+        {
+          blogPost.blogImageUrl != '-' &&
+          <div className='imageTileContainer'>
+            <img className='itemImageTile' src={`http://localhost:8080/${blogPost.blogImageUrl}`}></img>
+          </div>
+        }
         <div className='textTileContainer'>
           <div className='itemNameTileContainer'>
             <p className='blogNameTile'>{blogPost.title}</p>

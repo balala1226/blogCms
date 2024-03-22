@@ -41,10 +41,12 @@ export default function Home({ authenticated }){
             <div className='makeNewPostContainer'><h2>Make New Post</h2></div>
           </Link>
         }
-        <div className='allPostContainer'><h1>All Posts</h1></div>
-        {allPosts.map((currentPost, index) => (
-          <BlogPostTile  key={index} blogPost={currentPost}></BlogPostTile>
-        ))}
+        <h1>All Posts</h1>
+        <div className='allPostContainer'>
+          {allPosts.map((currentPost, index) => (
+            <BlogPostTile  key={index} blogPost={currentPost}></BlogPostTile>
+          ))}
+        </div>
       </div>
     </>
   )

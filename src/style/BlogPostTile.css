@@ -1,8 +1,9 @@
 .blogPostTile{
     display: flex;
-    width: 35vw;
-    height: 35vh;
+    width: 30vw;
+    height: 30vh;
     padding: 2%;
+    margin: 2%;
 
     border-radius: 20%;
     border: 1px solid black;
@@ -16,7 +17,7 @@
 .blogPostTileLink{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 
     width: 100%;

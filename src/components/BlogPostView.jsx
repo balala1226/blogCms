@@ -1,4 +1,4 @@
-import {useEffect, useReducer, useState} from 'react';
+import {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import { BlogPostModel } from '../models/BlogPostModel';
 import BlogPostForm from './BlogPostForm';
@@ -14,7 +14,6 @@ BlogPostView.propTypes = {
   authenticated: PropTypes.bool,
   currentUser: PropTypes.object
 }
-
 
 export default function BlogPostView({authenticated, currentUser}){
   const navigate = useNavigate();
@@ -125,7 +124,7 @@ export default function BlogPostView({authenticated, currentUser}){
               {
                 blogPost.blogImageUrl != '-' &&
                 <div className='postImageContainer'>
-                  <img className='postImage' src={blogPost.blogImageUrl}></img>
+                  <img className='postImage' src={`http://localhost:8080/${blogPost.blogImageUrl}`}></img>
                 </div>
               }
               <div className='postContentContainer'>
